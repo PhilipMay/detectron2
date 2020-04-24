@@ -21,8 +21,8 @@ from .build import BACKBONE_REGISTRY
 
 class EffNet(Backbone):
     def __init__(self):
-        self._eff_model = EfficientNet.from_pretrained("efficientnet-b1", advprop=True)
         super(EffNet, self).__init__()
+        self._eff_model = EfficientNet.from_pretrained("efficientnet-b1", advprop=True)
 
     def forward(self, x):
         return self._eff_model.extract_features(x)
