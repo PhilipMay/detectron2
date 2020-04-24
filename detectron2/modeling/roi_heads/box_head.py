@@ -1,4 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
+import logging
 import numpy as np
 from typing import List
 import fvcore.nn.weight_init as weight_init
@@ -39,6 +40,13 @@ class FastRCNNConvFCHead(nn.Module):
             conv_norm (str or callable): normalization for the conv layers.
                 See :func:`detectron2.layers.get_norm` for supported types.
         """
+
+        logger = logging.getLogger(__name__)
+        logger.info("FastRCNNConvFCHead input_shape: {}".format(input_shape))
+        logger.info("FastRCNNConvFCHead conv_dims: {}".format(conv_dims))
+        logger.info("FastRCNNConvFCHead fc_dims: {}".format(fc_dims))
+        logger.info("FastRCNNConvFCHead conv_norm: {}".format(conv_norm))
+
         super().__init__()
         assert len(conv_dims) + len(fc_dims) > 0
 
