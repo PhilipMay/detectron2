@@ -1,4 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
+import logging
 from typing import Dict, List
 import torch
 import torch.nn.functional as F
@@ -42,6 +43,9 @@ class StandardRPNHead(nn.Module):
 
     def __init__(self, cfg, input_shape: List[ShapeSpec]):
         super().__init__()
+
+        logger = logging.getLogger(__name__)
+        logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
         # Standard RPN is shared across levels:
         in_channels = [s.channels for s in input_shape]
