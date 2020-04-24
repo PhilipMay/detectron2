@@ -30,8 +30,16 @@ class EffNet(Backbone):
         return outputs
 
     def output_shape(self):
-        return
+        result = {
+            'res4': ShapeSpec(
+                channels=1024, stride=16
+            )
+        }
 
+        logger = logging.getLogger(__name__)
+        logger.info("build_resnet_backbone output_shape: {}".format(result))
+
+        return result
     def freeze(self, freeze_at=0):
         return self
 
