@@ -25,7 +25,9 @@ class EffNet(Backbone):
         self._eff_model = EfficientNet.from_pretrained("efficientnet-b1", advprop=True)
 
     def forward(self, x):
-        return self._eff_model.extract_features(x)
+        outputs = {}
+        outputs['res4'] = self._eff_model.extract_features(x)
+        return outputs
 
     def output_shape(self):
         return
