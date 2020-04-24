@@ -450,6 +450,9 @@ class ResNet(Backbone):
         for out_feature in self._out_features:
             assert out_feature in children, "Available children: {}".format(", ".join(children))
 
+        logger = logging.getLogger(__name__)
+        logger.info("build_resnet_backbone stages_and_names: {}".format(self.stages_and_names))
+
     def forward(self, x):
         outputs = {}
         x = self.stem(x)
