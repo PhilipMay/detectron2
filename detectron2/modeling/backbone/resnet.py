@@ -1,4 +1,5 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
+import logging
 import numpy as np
 import fvcore.nn.weight_init as weight_init
 import torch
@@ -504,6 +505,10 @@ def build_resnet_backbone(cfg, input_shape):
     Returns:
         ResNet: a :class:`ResNet` instance.
     """
+
+    logger = logging.getLogger(__name__)
+    logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
+
     # need registration of new blocks/stems?
     norm = cfg.MODEL.RESNETS.NORM
     stem = BasicStem(
