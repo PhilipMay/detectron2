@@ -585,4 +585,7 @@ def build_resnet_backbone(cfg, input_shape):
         out_channels *= 2
         bottleneck_channels *= 2
         stages.append(blocks)
+
+    logger.info("build_resnet_backbone stages: {}".format(stages))
+
     return ResNet(stem, stages, out_features=out_features).freeze(freeze_at)
