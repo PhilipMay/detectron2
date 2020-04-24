@@ -471,12 +471,17 @@ class ResNet(Backbone):
         return outputs
 
     def output_shape(self):
-        return {
+        result = {
             name: ShapeSpec(
                 channels=self._out_feature_channels[name], stride=self._out_feature_strides[name]
             )
             for name in self._out_features
         }
+
+        logger = logging.getLogger(__name__)
+        logger.info("build_resnet_backbone output_shape: {}".format(result))
+
+        return result
 
     def freeze(self, freeze_at=0):
         """
