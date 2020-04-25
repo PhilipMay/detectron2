@@ -49,6 +49,7 @@ class EffNet(Backbone):
         logger.info("EffNet output_shape: {}".format(result))
 
         return result
+
     def freeze(self, freeze_at=0):
         return self
 
