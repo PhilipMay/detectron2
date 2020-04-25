@@ -1,5 +1,6 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 import logging
+import inspect
 import numpy as np
 import fvcore.nn.weight_init as weight_init
 import torch
@@ -480,6 +481,12 @@ class ResNet(Backbone):
 
         logger = logging.getLogger(__name__)
         logger.info("build_resnet_backbone output_shape: {}".format(result))
+        
+        
+        curframe = inspect.currentframe()
+        calframe = inspect.getouterframes(curframe, 2)
+        call_func = calframe[1][3]
+        logger.info("build_resnet_backbone output_shape - call_func: {}".format(call_func))
 
         return result
 
