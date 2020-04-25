@@ -479,7 +479,7 @@ class ResNet(Backbone):
             for name in self._out_features
         }
 
-        logger.info("build_resnet_backbone output_shape: {}".format(result))
+        logger.info("ResNet output_shape: {}".format(result))
         
         
         curframe = inspect.currentframe()
