@@ -1,3 +1,4 @@
+import logging
 import torch
 from torch import nn
 from torch.nn import functional as F
@@ -14,6 +15,7 @@ from .utils import (
     MemoryEfficientSwish,
 )
 
+logger = logging.getLogger(__name__)
 
 class MBConvBlock(nn.Module):
     """
@@ -181,9 +183,7 @@ class EfficientNet(nn.Module):
                 drop_connect_rate *= float(idx) / len(self._blocks)
             x = block(x, drop_connect_rate=drop_connect_rate)
 
-            print('####################')
-            print('idx:', idx)
-            print(block)
+            logger.info("EfficientNet extract_features: {} - {}".format(idx, block))
 
         # Head
         x = self._swish(self._bn1(self._conv_head(x)))
