@@ -16,6 +16,7 @@ from .build import META_ARCH_REGISTRY
 
 __all__ = ["GeneralizedRCNN", "ProposalNetwork"]
 
+logger = logging.getLogger(__name__)
 
 @META_ARCH_REGISTRY.register()
 class GeneralizedRCNN(nn.Module):
@@ -29,12 +30,17 @@ class GeneralizedRCNN(nn.Module):
     def __init__(self, cfg):
         super().__init__()
 
+        logger.info('GeneralizedRCNN.__init__ --> build_backbone')
         self.backbone = build_backbone(cfg)
+        logger.info('GeneralizedRCNN.__init__ <-- build_backbone')
 
-        logger = logging.getLogger(__name__)
         logger.info("GeneralizedRCNN.__init__ output_shape: {}".format(self.backbone.output_shape()))
 
+        logger.info('GeneralizedRCNN.__init__ --> build_proposal_generator')
         self.proposal_generator = build_proposal_generator(cfg, self.backbone.output_shape())
+        logger.info('GeneralizedRCNN.__init__ <--> build_proposal_generator')
+
+
         self.roi_heads = build_roi_heads(cfg, self.backbone.output_shape())
         self.vis_period = cfg.VIS_PERIOD
         self.input_format = cfg.INPUT.FORMAT

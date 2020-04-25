@@ -30,6 +30,7 @@ __all__ = [
     "build_resnet_backbone",
 ]
 
+logger = logging.getLogger(__name__)
 
 ResNetBlockBase = CNNBlockBase
 """
@@ -451,7 +452,6 @@ class ResNet(Backbone):
         for out_feature in self._out_features:
             assert out_feature in children, "Available children: {}".format(", ".join(children))
 
-        logger = logging.getLogger(__name__)
         logger.info("build_resnet_backbone stages_and_names: {}".format(self.stages_and_names))
 
     def forward(self, x):
@@ -479,7 +479,6 @@ class ResNet(Backbone):
             for name in self._out_features
         }
 
-        logger = logging.getLogger(__name__)
         logger.info("build_resnet_backbone output_shape: {}".format(result))
         
         
@@ -520,8 +519,7 @@ def build_resnet_backbone(cfg, input_shape):
     Returns:
         ResNet: a :class:`ResNet` instance.
     """
-
-    logger = logging.getLogger(__name__)
+    logger.info("build_resnet_backbone -->")
     logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
     # need registration of new blocks/stems?
@@ -602,5 +600,7 @@ def build_resnet_backbone(cfg, input_shape):
         stages.append(blocks)
 
     logger.info("build_resnet_backbone stages: {}".format(stages))
+
+    logger.info("build_resnet_backbone <--")
 
     return ResNet(stem, stages, out_features=out_features).freeze(freeze_at)
