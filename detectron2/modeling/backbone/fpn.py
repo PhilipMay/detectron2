@@ -12,6 +12,8 @@ from .resnet import build_resnet_backbone
 
 __all__ = ["build_resnet_fpn_backbone", "build_retinanet_resnet_fpn_backbone", "FPN"]
 
+logger = logging.getLogger(__name__)
+
 
 class FPN(Backbone):
     """
@@ -144,12 +146,18 @@ class FPN(Backbone):
         return dict(zip(self._out_features, results))
 
     def output_shape(self):
-        return {
+
+        result = {
             name: ShapeSpec(
                 channels=self._out_feature_channels[name], stride=self._out_feature_strides[name]
             )
             for name in self._out_features
         }
+
+        logger.info("FPN output_shape: {}".format(result))
+
+        return result
+
 
 
 def _assert_strides_are_log2_contiguous(strides):

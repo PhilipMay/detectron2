@@ -18,6 +18,7 @@ from detectron2.layers import (
 from .backbone import Backbone
 from .build import BACKBONE_REGISTRY
 
+logger = logging.getLogger(__name__)
 
 class EffNet(Backbone):
     def __init__(self):
@@ -45,7 +46,6 @@ class EffNet(Backbone):
             ),
         }
 
-        logger = logging.getLogger(__name__)
         logger.info("EffNet output_shape: {}".format(result))
 
         return result
@@ -62,7 +62,6 @@ def build_effnet_backbone(cfg, input_shape):
         ResNet: a :class:`ResNet` instance.
     """
 
-    logger = logging.getLogger(__name__)
     logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
     return EffNet()
