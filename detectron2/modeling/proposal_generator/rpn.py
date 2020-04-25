@@ -98,6 +98,10 @@ class RPN(nn.Module):
     def __init__(self, cfg, input_shape: Dict[str, ShapeSpec]):
         super().__init__()
 
+        logger = logging.getLogger(__name__)
+        logger.info("RPN.__init__ input_shape: {}".format(input_shape))
+
+
         # fmt: off
         self.min_box_side_len     = cfg.MODEL.PROPOSAL_GENERATOR.MIN_SIZE
         self.in_features          = cfg.MODEL.RPN.IN_FEATURES
