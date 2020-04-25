@@ -101,6 +101,10 @@ class RPN(nn.Module):
         logger = logging.getLogger(__name__)
         logger.info("RPN.__init__ input_shape: {}".format(input_shape))
 
+        curframe = inspect.currentframe()
+        calframe = inspect.getouterframes(curframe, 2)
+        call_func = calframe[1][3]
+        logger.info("RPN.__init__ - call_func: {}".format(calframe))
 
         # fmt: off
         self.min_box_side_len     = cfg.MODEL.PROPOSAL_GENERATOR.MIN_SIZE
