@@ -11,7 +11,11 @@ from .backbone import Backbone
 from .build import BACKBONE_REGISTRY
 from .effnet import build_effnet_backbone
 
-__all__ = ["build_resnet_fpn_backbone", "build_retinanet_resnet_fpn_backbone", "FPN"]
+__all__ = [
+        "build_retinanet_resnet_fpn_backbone",
+        "FPN",
+        "build_effnet_fpn_backbone",
+        ]
 
 logger = logging.getLogger(__name__)
 
