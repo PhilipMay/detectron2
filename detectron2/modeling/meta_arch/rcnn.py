@@ -30,6 +30,10 @@ class GeneralizedRCNN(nn.Module):
         super().__init__()
 
         self.backbone = build_backbone(cfg)
+
+        logger = logging.getLogger(__name__)
+        logger.info("GeneralizedRCNN.__init__ output_shape: {}".format(self.backbone.output_shape()))
+
         self.proposal_generator = build_proposal_generator(cfg, self.backbone.output_shape())
         self.roi_heads = build_roi_heads(cfg, self.backbone.output_shape())
         self.vis_period = cfg.VIS_PERIOD
