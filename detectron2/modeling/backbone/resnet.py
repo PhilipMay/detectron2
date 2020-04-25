@@ -486,7 +486,7 @@ class ResNet(Backbone):
         curframe = inspect.currentframe()
         calframe = inspect.getouterframes(curframe, 2)
         call_func = calframe[1][3]
-        logger.info("build_resnet_backbone output_shape - call_func: {}".format(call_func))
+        logger.info("build_resnet_backbone output_shape - call_func: {}".format(calframe))
 
         return result
 
