@@ -129,6 +129,7 @@ class FPN(Backbone):
         bottom_up_features = self.bottom_up(x)
 
         logger.info('FPN.forward - self.in_features[::-1] {}'.format(self.in_features[::-1]))
+        logger.info('FPN.forward - bottom_up_features type {}'.format(type(bottom_up_features)))
         logger.info('FPN.forward - bottom_up_features {}'.format(bottom_up_features))
 
         x = [bottom_up_features[f] for f in self.in_features[::-1]]
