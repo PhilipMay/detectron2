@@ -24,6 +24,7 @@ logger = logging.getLogger(__name__)
 class EffNet(Backbone):
     def __init__(self):
         super(EffNet, self).__init__()
+        logger.info("EfficientNet.__init__")
         self._eff_model = EfficientNet.from_pretrained("efficientnet-b1", advprop=True)
         for idx, block in enumerate(self._eff_model._blocks):
             logger.info("### EfficientNet extract_features: {} - {}".format(idx, block))
