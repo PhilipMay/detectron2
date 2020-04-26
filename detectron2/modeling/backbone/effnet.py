@@ -45,7 +45,7 @@ class EffNet(Backbone):
                 channels=160, stride=8
             ),
             'res4': ShapeSpec(
-                channels=273, stride=16
+                channels=272, stride=16
             ),
             'res5': ShapeSpec(
                 channels=448, stride=32

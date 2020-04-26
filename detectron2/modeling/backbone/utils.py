@@ -94,10 +94,11 @@ def drop_connect(inputs, p, training):
 def get_same_padding_conv2d(image_size=None):
     """ Chooses static padding if you have specified an image size, and dynamic padding otherwise.
         Static padding is necessary for ONNX exporting of models. """
-    if image_size is None:
-        return Conv2dDynamicSamePadding
-    else:
-        return partial(Conv2dStaticSamePadding, image_size=image_size)
+    return Conv2dDynamicSamePadding
+    #if image_size is None:
+    #    return Conv2dDynamicSamePadding
+    #else:
+    #    return partial(Conv2dStaticSamePadding, image_size=image_size)
 
 
 class Conv2dDynamicSamePadding(nn.Conv2d):
