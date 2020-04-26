@@ -69,5 +69,6 @@ def build_effnet_backbone(cfg, input_shape):
     """
 
     logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
+    assert input_shape.channels == 3
 
     return EffNet()

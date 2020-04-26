@@ -185,6 +185,8 @@ class EfficientNet(nn.Module):
                 drop_connect_rate *= float(idx) / len(self._blocks)
             x = block(x, drop_connect_rate=drop_connect_rate)
 
+            logger.info('### EffNet Block {} - {} - {}'.format(idx, x.size(), block._block_args))
+
             if idx == 31:
                 outputs['res5'] = x
             elif idx == 21:
