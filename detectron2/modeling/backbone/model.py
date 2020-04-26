@@ -189,12 +189,21 @@ class EfficientNet(nn.Module):
                 drop_connect_rate *= float(idx) / len(self._blocks)
             x = block(x, drop_connect_rate=drop_connect_rate)
 
+            if idx == 31:
+                outputs['res5'] = x
+            elif idx == 21:
+                outputs['res4'] = x
+            elif idx == 9:
+                outputs['res3'] = x
+            elif idx == 5:
+                outputs['res2'] = x
+
             print('### block.size {} - {}'.format(idx, x.size()))
 
         # Head
         x = self._swish(self._bn1(self._conv_head(x)))
 
-        return x
+        return outputs
 
     def extract_features(self, inputs):
         """ Returns output of the final convolution layer """

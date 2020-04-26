@@ -32,20 +32,19 @@ class EffNet(Backbone):
             logger.info("EfficientNet extract_features: {}".format(block._block_args))
 
     def forward(self, x):
-        outputs = {}
-        outputs['res4'] = self._eff_model.extract_features(x)
+        outputs = self._eff_model.fpn_forward
         return outputs
 
     def output_shape(self):
         result = {
             'res2': ShapeSpec(
-                channels=112, stride=4
+                channels=32, stride=4
             ),
             'res3': ShapeSpec(
-                channels=160, stride=8
+                channels=56, stride=8
             ),
             'res4': ShapeSpec(
-                channels=272, stride=16
+                channels=160, stride=16
             ),
             'res5': ShapeSpec(
                 channels=448, stride=32
