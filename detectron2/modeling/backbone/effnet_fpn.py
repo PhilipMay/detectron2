@@ -149,7 +149,7 @@ class FPN(Backbone):
         assert len(self._out_features) == len(results)
 
         result_ = dict(zip(self._out_features, results))
-        logger.info('FPM.forward', result_)
+        logger.info('FPN.forward', result_)
         return result_
 
     def output_shape(self):
