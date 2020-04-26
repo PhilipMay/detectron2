@@ -147,7 +147,10 @@ class FPN(Backbone):
                 top_block_in_feature = results[self._out_features.index(self.top_block.in_feature)]
             results.extend(self.top_block(top_block_in_feature))
         assert len(self._out_features) == len(results)
-        return dict(zip(self._out_features, results))
+
+        result_ = dict(zip(self._out_features, results))
+        logger.info('FPM.forward', result_)
+        return result_
 
     def output_shape(self):
 

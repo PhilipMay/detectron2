@@ -39,16 +39,16 @@ class EffNet(Backbone):
     def output_shape(self):
         result = {
             'res2': ShapeSpec(
-                channels=256, stride=4
+                channels=112, stride=4
             ),
             'res3': ShapeSpec(
-                channels=512, stride=8
+                channels=160, stride=8
             ),
             'res4': ShapeSpec(
-                channels=1024, stride=16
+                channels=273, stride=16
             ),
             'res5': ShapeSpec(
-                channels=2048, stride=32
+                channels=448, stride=32
             ),
         }
 
