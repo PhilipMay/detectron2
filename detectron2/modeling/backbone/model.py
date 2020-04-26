@@ -184,6 +184,7 @@ class EfficientNet(nn.Module):
             x = block(x, drop_connect_rate=drop_connect_rate)
 
             print('### block size {} - {}'.format(idx, x.size()))
+            raise Exception('TEST')
 
         # Head
         x = self._swish(self._bn1(self._conv_head(x)))
