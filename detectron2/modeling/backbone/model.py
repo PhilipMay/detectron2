@@ -180,7 +180,7 @@ class EfficientNet(nn.Module):
         # Stem
         x = self._swish(self._bn0(self._conv_stem(inputs)))
 
-        logger.info('### EffNet Block stem {}'.format(stem.size()))
+        logger.info('### EffNet Block stem {}'.format(x.size()))
 
         # Blocks
         for idx, block in enumerate(self._blocks):
