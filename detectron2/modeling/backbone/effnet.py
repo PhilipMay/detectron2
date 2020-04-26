@@ -32,7 +32,7 @@ class EffNet(Backbone):
             logger.info("EfficientNet extract_features: {}".format(block._block_args))
 
     def forward(self, x):
-        outputs = self._eff_model.fpn_forward()
+        outputs = self._eff_model.fpn_forward(x)
         return outputs
 
     def output_shape(self):
