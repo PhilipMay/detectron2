@@ -452,7 +452,7 @@ class ResNet(Backbone):
         for out_feature in self._out_features:
             assert out_feature in children, "Available children: {}".format(", ".join(children))
 
-        logger.info("build_resnet_backbone stages_and_names: {}".format(self.stages_and_names))
+        #logger.info("build_resnet_backbone stages_and_names: {}".format(self.stages_and_names))
 
     def forward(self, x):
         outputs = {}
@@ -479,13 +479,13 @@ class ResNet(Backbone):
             for name in self._out_features
         }
 
-        logger.info("ResNet output_shape: {}".format(result))
+        #logger.info("ResNet output_shape: {}".format(result))
         
         
         curframe = inspect.currentframe()
         calframe = inspect.getouterframes(curframe, 2)
         call_func = calframe[1][3]
-        logger.info("build_resnet_backbone output_shape - call_func: {}".format(calframe))
+        #logger.info("build_resnet_backbone output_shape - call_func: {}".format(calframe))
 
         return result
 
@@ -519,8 +519,8 @@ def build_resnet_backbone(cfg, input_shape):
     Returns:
         ResNet: a :class:`ResNet` instance.
     """
-    logger.info("build_resnet_backbone -->")
-    logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
+    #logger.info("build_resnet_backbone -->")
+    #logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
     # need registration of new blocks/stems?
     norm = cfg.MODEL.RESNETS.NORM
@@ -599,8 +599,8 @@ def build_resnet_backbone(cfg, input_shape):
         bottleneck_channels *= 2
         stages.append(blocks)
 
-    logger.info("build_resnet_backbone stages: {}".format(stages))
+    #logger.info("build_resnet_backbone stages: {}".format(stages))
 
-    logger.info("build_resnet_backbone <--")
+    #logger.info("build_resnet_backbone <--")
 
     return ResNet(stem, stages, out_features=out_features).freeze(freeze_at)

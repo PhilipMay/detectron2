@@ -24,12 +24,12 @@ logger = logging.getLogger(__name__)
 class EffNet(Backbone):
     def __init__(self):
         super(EffNet, self).__init__()
-        logger.info("EfficientNet.__init__")
+        #logger.info("EfficientNet.__init__")
         self._eff_model = EfficientNet.from_pretrained("efficientnet-b4", advprop=True)
-        for idx, block in enumerate(self._eff_model._blocks):
-            logger.info("##################################")
-            logger.info("EfficientNet extract_features: {} - {}".format(idx, block))
-            logger.info("EfficientNet extract_features: {}".format(block._block_args))
+        #for idx, block in enumerate(self._eff_model._blocks):
+            #logger.info("##################################")
+            #logger.info("EfficientNet extract_features: {} - {}".format(idx, block))
+            #logger.info("EfficientNet extract_features: {}".format(block._block_args))
 
     def forward(self, x):
         outputs = self._eff_model.fpn_forward(x)
@@ -68,6 +68,6 @@ def build_effnet_backbone(cfg, input_shape):
         ResNet: a :class:`ResNet` instance.
     """
 
-    logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
+    #logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
     return EffNet()
