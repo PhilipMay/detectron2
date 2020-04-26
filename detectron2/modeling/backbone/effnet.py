@@ -51,7 +51,7 @@ class EffNet(Backbone):
             ),
         }
 
-        logger.info("EffNet output_shape: {}".format(result))
+        #logger.info("EffNet output_shape: {}".format(result))
 
         return result
 
