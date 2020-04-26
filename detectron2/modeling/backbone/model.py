@@ -198,7 +198,7 @@ class EfficientNet(nn.Module):
             elif idx == 5:
                 outputs['res2'] = x
 
-            print('### block.size {} - {}'.format(idx, x.size()))
+            print('### block.size {} - {} - {}'.format(idx, x.size(), block._block_args))
 
         # Head
         x = self._swish(self._bn1(self._conv_head(x)))
