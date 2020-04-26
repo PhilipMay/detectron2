@@ -68,6 +68,6 @@ def build_effnet_backbone(cfg, input_shape):
         ResNet: a :class:`ResNet` instance.
     """
 
-    #logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
+    logger.info("build_resnet_backbone input_shape: {}".format(input_shape))
 
     return EffNet()
