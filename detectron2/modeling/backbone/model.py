@@ -173,8 +173,12 @@ class EfficientNet(nn.Module):
     def extract_features(self, inputs):
         """ Returns output of the final convolution layer """
 
+        print('### block.size input {}'.format(inputs.size()))
+
         # Stem
         x = self._swish(self._bn0(self._conv_stem(inputs)))
+
+        print('### block.size stem {}'.format(x.size()))
 
         # Blocks
         for idx, block in enumerate(self._blocks):
