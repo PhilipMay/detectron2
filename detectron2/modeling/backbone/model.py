@@ -173,10 +173,14 @@ class EfficientNet(nn.Module):
     def fpn_forward(self, inputs):
         """ Returns output of the final convolution layer """
 
+        logger.info('### EffNet Block inputs {}'.format(inputs.size()))
+
         outputs = {}
 
         # Stem
         x = self._swish(self._bn0(self._conv_stem(inputs)))
+
+        logger.info('### EffNet Block stem {}'.format(stem.size()))
 
         # Blocks
         for idx, block in enumerate(self._blocks):
