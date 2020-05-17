@@ -170,40 +170,6 @@ class EfficientNet(nn.Module):
         for block in self._blocks:
             block.set_swish(memory_efficient)
 
-    def fpn_forward(self, inputs):
-        """ Returns output of the final convolution layer """
-
-        logger.info('### EffNet Block inputs {}'.format(inputs.size()))
-
-        outputs = {}
-
-        # Stem
-        x = self._swish(self._bn0(self._conv_stem(inputs)))
-
-        logger.info('### EffNet Block stem {}'.format(x.size()))
-
-        # Blocks
-        for idx, block in enumerate(self._blocks):
-            drop_connect_rate = self._global_params.drop_connect_rate
-            if drop_connect_rate:
-                drop_connect_rate *= float(idx) / len(self._blocks)
-            x = block(x, drop_connect_rate=drop_connect_rate)
-
-            logger.info('### EffNet Block {} - {} - {}'.format(idx, x.size(), block._block_args))
-
-            if idx == 31:
-                outputs['res5'] = x
-            elif idx == 21:
-                outputs['res4'] = x
-            elif idx == 9:
-                outputs['res3'] = x
-            elif idx == 5:
-                outputs['res2'] = x
-
-        # Head
-        #x = self._swish(self._bn1(self._conv_head(x)))
-
-        return outputs
 
     def extract_features(self, inputs):
         """ Returns output of the final convolution layer """

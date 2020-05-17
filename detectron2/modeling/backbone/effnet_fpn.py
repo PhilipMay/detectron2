@@ -1,4 +1,3 @@
-# Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 import logging
 import math
 import fvcore.nn.weight_init as weight_init
@@ -171,7 +170,6 @@ class FPN(Backbone):
         return result
 
 
-
 def _assert_strides_are_log2_contiguous(strides):
     """
     Assert that each stride is 2x times its preceding stride, i.e. "contiguous in log2".
@@ -182,51 +180,8 @@ def _assert_strides_are_log2_contiguous(strides):
         )
 
 
-class LastLevelMaxPool(nn.Module):
-    """
-    This module is used in the original FPN to generate a downsampled
-    P6 feature from P5.
-    """
-
-    def __init__(self):
-        super().__init__()
-        self.num_levels = 1
-        self.in_feature = "p5"
-
-    def forward(self, x):
-        return [F.max_pool2d(x, kernel_size=1, stride=2, padding=0)]
-
-
-class LastLevelP6P7(nn.Module):
-    """
-    This module is used in RetinaNet to generate extra layers, P6 and P7 from
-    C5 feature.
-    """
-
-    def __init__(self, in_channels, out_channels, in_feature="res5"):
-        super().__init__()
-        self.num_levels = 2
-        self.in_feature = in_feature
-        self.p6 = nn.Conv2d(in_channels, out_channels, 3, 2, 1)
-        self.p7 = nn.Conv2d(out_channels, out_channels, 3, 2, 1)
-        for module in [self.p6, self.p7]:
-            weight_init.c2_xavier_fill(module)
-
-    def forward(self, c5):
-        p6 = self.p6(c5)
-        p7 = self.p7(F.relu(p6))
-        return [p6, p7]
-
-
 @BACKBONE_REGISTRY.register()
 def build_effnet_fpn_backbone(cfg, input_shape: ShapeSpec):
-    """
-    Args:
-        cfg: a detectron2 CfgNode
-
-    Returns:
-        backbone (Backbone): backbone module, must be a subclass of :class:`Backbone`.
-    """
     bottom_up = build_effnet_backbone(cfg, input_shape)
     in_features = cfg.MODEL.FPN.IN_FEATURES
     out_channels = cfg.MODEL.FPN.OUT_CHANNELS
@@ -239,4 +194,3 @@ def build_effnet_fpn_backbone(cfg, input_shape: ShapeSpec):
         fuse_type=cfg.MODEL.FPN.FUSE_TYPE,
     )
     return backbone
-
