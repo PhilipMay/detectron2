@@ -179,6 +179,20 @@ def _assert_strides_are_log2_contiguous(strides):
             stride, strides[i - 1]
         )
 
+class LastLevelMaxPool(nn.Module):
+    """
+    This module is used in the original FPN to generate a downsampled
+    P6 feature from P5.
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.num_levels = 1
+        self.in_feature = "p5"
+
+    def forward(self, x):
+        return [F.max_pool2d(x, kernel_size=1, stride=2, padding=0)]
+
 
 @BACKBONE_REGISTRY.register()
 def build_effnet_fpn_backbone(cfg, input_shape: ShapeSpec):
