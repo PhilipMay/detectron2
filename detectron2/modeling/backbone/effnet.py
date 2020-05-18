@@ -24,14 +24,14 @@ logger = logging.getLogger(__name__)
 def fpn_forward(self, inputs):
     """ Returns output of the final convolution layer """
 
-    logger.info('### EffNet Block inputs {}'.format(inputs.size()))
+    #logger.info('### EffNet Block inputs {}'.format(inputs.size()))
 
     outputs = {}
 
     # Stem
     x = self._swish(self._bn0(self._conv_stem(inputs)))
 
-    logger.info('### EffNet Block stem {}'.format(x.size()))
+    #logger.info('### EffNet Block stem {}'.format(x.size()))
 
     # Blocks
     for idx, block in enumerate(self._blocks):
@@ -40,7 +40,7 @@ def fpn_forward(self, inputs):
             drop_connect_rate *= float(idx) / len(self._blocks)
         x = block(x, drop_connect_rate=drop_connect_rate)
 
-        logger.info('### EffNet Block {} - {} - {}'.format(idx, x.size(), block._block_args))
+        #logger.info('### EffNet Block {} - {} - {}'.format(idx, x.size(), block._block_args))
 
         if idx == 31:
             outputs['res5'] = x
