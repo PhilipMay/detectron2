@@ -61,8 +61,10 @@ class EffNet(Backbone):
     def __init__(self):
         super(EffNet, self).__init__()
         #logger.info("EfficientNet.__init__")
+        EfficientNet.fpn_forward = fpn_forward
         self._eff_model = EfficientNet.from_pretrained("efficientnet-b4", advprop=True)
-        self._eff_model.fpn_forward = fpn_forward
+        #self._eff_model.fpn_forward = fpn_forward
+
         #for idx, block in enumerate(self._eff_model._blocks):
             #logger.info("##################################")
             #logger.info("EfficientNet extract_features: {} - {}".format(idx, block))
